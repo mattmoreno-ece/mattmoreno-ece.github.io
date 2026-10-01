@@ -3,10 +3,9 @@
   Matthew Moreno — Portfolio
   ---------------------------------------------------------------
   HOW TO EDIT
-  • Add your GitHub and LinkedIn links: search for "TODO" in this file.
-  • Add project photos later: put the image in an "images" folder and
-    replace a project's <svg>...</svg> diagram with:
-        <img src="images/fpga-vending.jpg" alt="FPGA vending machine controller on a Basys 3 board">
+  • LinkedIn button is hidden until you add your URL: search for "LinkedIn:" in this file.
+  • Photos and videos live in the "images" folder. To add a photo to a project, give its
+    figure the class "figure media" and put <img src="images/your-photo.jpg" alt="..."> inside.
   • The résumé button opens resume.pdf. Keep that file in the same folder as this page.
 -->
 <html lang="en">
@@ -121,10 +120,43 @@
     border-right: 1px solid var(--line);
   }
   .figure svg { width: 100%; max-width: 360px; height: auto; overflow: visible; }
-  .figure img { width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0; }
   .figure .tag {
-    position: absolute; left: 14px; bottom: 12px;
+    position: absolute; left: 14px; bottom: 12px; z-index: 1;
     font: 11px var(--mono); color: var(--muted); letter-spacing: .04em;
+  }
+  .figure.media { padding: 0; min-height: 330px; background: #14161a; }
+  .figure.media img, .figure.media video {
+    position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block;
+  }
+  .figure.tall { min-height: 470px; }
+  .figure.paper { background: #f7f5ec; padding: 20px; }
+  .figure.paper img { width: 100%; height: auto; max-height: 440px; object-fit: contain; display: block; }
+  .figure .tag.on-media {
+    left: 12px; bottom: 12px; right: 12px; width: fit-content; max-width: calc(100% - 24px);
+    background: rgba(12,14,18,.74); color: #f1efe9; padding: 5px 9px; border-radius: 7px;
+    -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
+  }
+  .expand {
+    position: absolute; top: 12px; right: 12px; z-index: 1;
+    font: 500 11.5px var(--mono); letter-spacing: .03em; cursor: zoom-in;
+    background: rgba(12,14,18,.74); color: #f1efe9; border: 1px solid rgba(255,255,255,.14);
+    padding: 6px 10px; border-radius: 7px;
+  }
+  .expand:hover { background: rgba(12,14,18,.9); }
+  .figure.paper .expand { background: rgba(22,24,29,.82); }
+  @media (min-width: 801px) {
+    .project.flip { grid-template-columns: 1.15fr 1fr; }
+    .project.flip .figure { order: 2; border-right: 0; border-left: 1px solid var(--line); }
+  }
+
+  /* lightbox */
+  dialog.lb { border: 0; padding: 0; background: transparent; max-width: min(96vw, 1200px); max-height: 94vh; overflow: visible; }
+  dialog.lb::backdrop { background: rgba(8,9,12,.88); }
+  dialog.lb img { display: block; max-width: 100%; max-height: 84vh; margin: 0 auto; border-radius: 10px; }
+  dialog.lb p { color: #e9e7e2; font: 13px/1.5 var(--mono); margin: 12px 4px 0; text-align: center; }
+  dialog.lb .close {
+    position: absolute; top: -44px; right: 0; background: none; border: 1px solid rgba(255,255,255,.3);
+    color: #fff; font: 500 13px var(--mono); padding: 6px 12px; border-radius: 8px; cursor: pointer;
   }
   .body { padding: 28px 30px 30px; }
   .kind { font: 500 12px var(--mono); color: var(--accent); letter-spacing: .06em; text-transform: uppercase; margin-bottom: 10px; }
@@ -145,9 +177,6 @@
   .d-label { font: 10.5px var(--mono); fill: var(--muted); }
   .d-state { fill: var(--surface); stroke: var(--trace); stroke-width: 2; }
   .d-state-text { font: 600 10px var(--mono); fill: var(--ink); text-anchor: middle; dominant-baseline: middle; }
-  .seg { fill: var(--accent); transition: opacity .15s; }
-  .seg.off { opacity: .1; }
-  .colon { fill: var(--accent); }
 
   /* ---------- Experience ---------- */
   .timeline { display: grid; gap: 0; }
@@ -183,7 +212,9 @@
   /* ---------- Responsive ---------- */
   @media (max-width: 800px) {
     .project { grid-template-columns: 1fr; }
-    .figure { border-right: 0; border-bottom: 1px solid var(--line); min-height: 200px; }
+    .figure { border-right: 0; border-bottom: 1px solid var(--line); min-height: 220px; }
+    .figure.media { min-height: 0; aspect-ratio: 4 / 3; }
+    .figure.tall { aspect-ratio: 1 / 1; }
     .edu { grid-template-columns: 1fr; }
     .job { grid-template-columns: 1fr; gap: 6px; }
   }
@@ -198,7 +229,7 @@
   }
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
-    .btn, .seg { transition: none; }
+    .btn { transition: none; }
   }
 </style>
 </head>
@@ -234,13 +265,13 @@
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M9 14h6M9 17h4"/></svg>
         Résumé
       </a>
-      <!-- TODO: replace with your LinkedIn URL -->
+      <!-- LinkedIn: paste your profile URL into href, then remove the comment markers around this button
       <a class="btn" href="https://www.linkedin.com/in/YOUR-LINKEDIN" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.75h4v11H3zm7 0h3.8v1.5h.06c.53-1 1.83-2.06 3.77-2.06 4.03 0 4.77 2.65 4.77 6.1v5.46h-4v-4.84c0-1.16-.02-2.64-1.6-2.64-1.62 0-1.86 1.26-1.86 2.56v4.92h-4z"/></svg>
         LinkedIn
       </a>
-      <!-- TODO: replace with your GitHub URL -->
-      <a class="btn" href="https://github.com/YOUR-GITHUB" target="_blank" rel="noopener">
+      -->
+      <a class="btn" href="https://github.com/Mangoz4116" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.42-2.7 5.4-5.26 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5z"/></svg>
         GitHub
       </a>
@@ -260,14 +291,70 @@
 
     <div class="projects">
 
-      <!-- Project 1 -->
+      <!-- Project: AC-to-DC -->
       <article class="project">
+        <div class="figure media">
+          <video src="images/regulator-demo.mp4" poster="images/regulator-poster.jpg" autoplay muted loop playsinline preload="metadata" aria-label="Turning the potentiometer changes the regulated output voltage shown on the display"></video>
+          <span class="tag on-media">▶ Bench test: turning the pot sweeps the regulated output</span>
+        </div>
+        <div class="body">
+          <div class="kind">Power Electronics</div>
+          <h3>AC-to-DC Voltage Converter</h3>
+          <p>A working power supply that turns AC into a stable DC output.</p>
+          <ul>
+            <li>Designed and built the rectification, filtering, and voltage-regulation stages</li>
+            <li>Verified output stability with an oscilloscope and digital multimeter</li>
+          </ul>
+          <div class="chips"><span class="chip">Rectification</span><span class="chip">Filtering</span><span class="chip">Regulation</span><span class="chip">Oscilloscope</span></div>
+        </div>
+      </article>
+
+      <!-- Project: Animatronic skulls -->
+      <article class="project flip">
+        <div class="figure media tall">
+          <img src="images/skulls.jpg" alt="Two animatronic skulls on stands, wired to an Arduino and a breadboard" loading="lazy" style="object-position: 50% 30%">
+          <span class="tag on-media">Two finished skulls, wired to the control board</span>
+        </div>
+        <div class="body">
+          <div class="kind">Robotics · Arduino</div>
+          <h3>Animatronic Skulls</h3>
+          <p>A pair of animatronic skulls with servo-driven jaws, controlled by an Arduino and triggered from an IR remote.</p>
+          <ul>
+            <li>Mounted a servo motor in each skull to open and close the jaw</li>
+            <li>Wired and prototyped the control electronics on a breadboard</li>
+            <li>Programmed the Arduino to read IR remote commands and drive the servos</li>
+          </ul>
+          <div class="chips"><span class="chip">Arduino</span><span class="chip">Servo Motors</span><span class="chip">IR Remote</span><span class="chip">Embedded C</span></div>
+        </div>
+      </article>
+
+      <!-- Project: Digital clock -->
+      <article class="project">
+        <div class="figure media dark">
+          <img src="images/clock-schematic-detail.jpg" alt="Hand-drawn schematic of the clock's hours section: tens and ones counters and an adder chip" loading="lazy" style="object-position: 50% 40%">
+          <button class="expand" data-full="images/clock-schematic.jpg" data-caption="Hours section of the 12-hour clock: tens and ones counters, with gate logic that resets the count at 10 and at 13.">⤢ Full schematic</button>
+          <span class="tag on-media">My hours-section schematic</span>
+        </div>
+        <div class="body">
+          <div class="kind">Sequential Logic</div>
+          <h3>Digital 12-Hour Clock</h3>
+          <p>A digital clock built from sequential logic and timing circuits.</p>
+          <ul>
+            <li>Built binary counters and clock-division logic from flip-flops and clock signals</li>
+            <li>Designed reset logic so the hours roll over correctly from 12 back to 1</li>
+            <li>Applied core digital-systems concepts, including synchronization and state control</li>
+          </ul>
+          <div class="chips"><span class="chip">Flip-Flops</span><span class="chip">Binary Counters</span><span class="chip">Clock Division</span><span class="chip">Timing</span></div>
+        </div>
+      </article>
+
+      <!-- Project: FPGA vending machine (replace the <svg> with a photo when you have one) -->
+      <article class="project flip">
         <div class="figure">
-          <!-- Replace this <svg> with <img src="images/fpga-vending.jpg" alt="..."> when you have a photo -->
           <svg viewBox="0 -24 320 200" role="img" aria-label="State diagram: Idle, Credit, Vend, Change">
             <defs>
               <marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-                <path d="M0 0 L10 5 L0 10 z" fill="currentColor" style="fill:var(--muted)"/>
+                <path d="M0 0 L10 5 L0 10 z" style="fill:var(--muted)"/>
               </marker>
             </defs>
             <line class="d-arrow" x1="83" y1="78" x2="133" y2="53" marker-end="url(#ah)"/>
@@ -285,7 +372,7 @@
             <circle class="d-state" cx="260" cy="90" r="26"/><text class="d-state-text" x="260" y="90">VEND</text>
             <circle class="d-state" cx="160" cy="140" r="26"/><text class="d-state-text" x="160" y="140">CHANGE</text>
           </svg>
-          <span class="tag">fig. 1 — FSM concept</span>
+          <span class="tag">fig. — FSM concept</span>
         </div>
         <div class="body">
           <div class="kind">Digital Logic · FPGA</div>
@@ -300,58 +387,22 @@
         </div>
       </article>
 
-      <!-- Project 2 -->
+      <!-- Project: Factorial datapath -->
       <article class="project">
-        <div class="figure">
-          <!-- Replace this <svg> with <img src="images/digital-clock.jpg" alt="..."> when you have a photo -->
-          <svg id="clock" viewBox="-12 -12 282 94" role="img" aria-label="Seven-segment display showing the current time"></svg>
-          <span class="tag">fig. 2 — live 7-segment readout</span>
+        <div class="figure paper">
+          <img src="images/factorial-datapath.jpg" alt="Hand-drawn datapath: product and N registers, multiplier, subtractor, multiplexers and comparator" loading="lazy">
+          <button class="expand" data-full="images/factorial-datapath.jpg" data-caption="Factorial datapath: the product register is multiplied by N each cycle while a subtractor counts N down; a comparator flags N > 1.">⤢ Enlarge</button>
         </div>
         <div class="body">
-          <div class="kind">Sequential Logic</div>
-          <h3>Digital 12-Hour Clock</h3>
-          <p>A digital clock built from sequential logic and timing circuits.</p>
+          <div class="kind">RTL Design · Advanced Digital</div>
+          <h3>Factorial Datapath</h3>
+          <p>An 8-bit datapath that computes N factorial in hardware.</p>
           <ul>
-            <li>Built binary counters and clock-division logic from flip-flops and clock signals</li>
-            <li>Applied core digital-systems concepts, including synchronization and state control</li>
+            <li>Designed registers that hold the running product and the counter N, with multiplexers to load starting values</li>
+            <li>Used a multiplier to update the product and a subtractor to count N down</li>
+            <li>Added a comparator that signals when N reaches 1, so the controller knows when to stop</li>
           </ul>
-          <div class="chips"><span class="chip">Flip-Flops</span><span class="chip">Binary Counters</span><span class="chip">Clock Division</span><span class="chip">Timing</span></div>
-        </div>
-      </article>
-
-      <!-- Project 3 -->
-      <article class="project">
-        <div class="figure">
-          <!-- Replace this <svg> with <img src="images/ac-dc-converter.jpg" alt="..."> when you have a photo -->
-          <svg viewBox="-4 0 338 104" role="img" aria-label="AC sine wave, full-wave rectified wave, and regulated DC output">
-            <defs>
-              <marker id="ah2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto">
-                <path d="M0 0 L10 5 L0 10 z" style="fill:var(--muted)"/>
-              </marker>
-            </defs>
-            <line class="d-axis" x1="0" y1="45" x2="80" y2="45"/>
-            <line class="d-axis" x1="125" y1="56" x2="205" y2="56"/>
-            <line class="d-axis" x1="250" y1="56" x2="330" y2="56"/>
-            <polyline class="d-trace" points="0.0,45.0 1.3,40.4 2.7,36.1 4.0,32.1 5.3,28.7 6.7,25.9 8.0,24.1 9.3,23.1 10.7,23.1 12.0,24.1 13.3,25.9 14.7,28.7 16.0,32.1 17.3,36.1 18.7,40.4 20.0,45.0 21.3,49.6 22.7,53.9 24.0,57.9 25.3,61.3 26.7,64.1 28.0,65.9 29.3,66.9 30.7,66.9 32.0,65.9 33.3,64.1 34.7,61.3 36.0,57.9 37.3,53.9 38.7,49.6 40.0,45.0 41.3,40.4 42.7,36.1 44.0,32.1 45.3,28.7 46.7,25.9 48.0,24.1 49.3,23.1 50.7,23.1 52.0,24.1 53.3,25.9 54.7,28.7 56.0,32.1 57.3,36.1 58.7,40.4 60.0,45.0 61.3,49.6 62.7,53.9 64.0,57.9 65.3,61.3 66.7,64.1 68.0,65.9 69.3,66.9 70.7,66.9 72.0,65.9 73.3,64.1 74.7,61.3 76.0,57.9 77.3,53.9 78.7,49.6 80.0,45.0"/>
-            <polyline class="d-trace" points="125.0,56.0 126.3,51.4 127.7,47.1 129.0,43.1 130.3,39.7 131.7,36.9 133.0,35.1 134.3,34.1 135.7,34.1 137.0,35.1 138.3,36.9 139.7,39.7 141.0,43.1 142.3,47.1 143.7,51.4 145.0,56.0 146.3,51.4 147.7,47.1 149.0,43.1 150.3,39.7 151.7,36.9 153.0,35.1 154.3,34.1 155.7,34.1 157.0,35.1 158.3,36.9 159.7,39.7 161.0,43.1 162.3,47.1 163.7,51.4 165.0,56.0 166.3,51.4 167.7,47.1 169.0,43.1 170.3,39.7 171.7,36.9 173.0,35.1 174.3,34.1 175.7,34.1 177.0,35.1 178.3,36.9 179.7,39.7 181.0,43.1 182.3,47.1 183.7,51.4 185.0,56.0 186.3,51.4 187.7,47.1 189.0,43.1 190.3,39.7 191.7,36.9 193.0,35.1 194.3,34.1 195.7,34.1 197.0,35.1 198.3,36.9 199.7,39.7 201.0,43.1 202.3,47.1 203.7,51.4 205.0,56.0"/>
-            <polyline class="d-trace" points="250.0,31.0 257.0,32.0 267.0,33.5 270.0,31.0 277.0,32.0 287.0,33.5 290.0,31.0 297.0,32.0 307.0,33.5 310.0,31.0 317.0,32.0 327.0,33.5 330.0,31.0"/>
-            <line class="d-arrow" x1="90" y1="45" x2="116" y2="45" marker-end="url(#ah2)"/>
-            <line class="d-arrow" x1="215" y1="45" x2="241" y2="45" marker-end="url(#ah2)"/>
-            <text class="d-label" x="40" y="92" text-anchor="middle">AC in</text>
-            <text class="d-label" x="165" y="92" text-anchor="middle">rectified</text>
-            <text class="d-label" x="290" y="92" text-anchor="middle">regulated DC</text>
-          </svg>
-          <span class="tag">fig. 3 — signal path</span>
-        </div>
-        <div class="body">
-          <div class="kind">Power Electronics</div>
-          <h3>AC-to-DC Voltage Converter</h3>
-          <p>A working power supply that turns AC mains into a stable DC output.</p>
-          <ul>
-            <li>Designed and built the rectification, filtering, and voltage-regulation stages</li>
-            <li>Verified output stability with an oscilloscope and digital multimeter</li>
-          </ul>
-          <div class="chips"><span class="chip">Rectification</span><span class="chip">Filtering</span><span class="chip">Regulation</span><span class="chip">Oscilloscope</span></div>
+          <div class="chips"><span class="chip">RTL</span><span class="chip">Datapath</span><span class="chip">Registers</span><span class="chip">Multiplexers</span></div>
         </div>
       </article>
 
@@ -478,63 +529,32 @@
   </div>
 </footer>
 
+<dialog class="lb" id="lb">
+  <button class="close" type="button" aria-label="Close">Close ✕</button>
+  <img alt="">
+  <p></p>
+</dialog>
+
 <script>
-  // ---- Live 7-segment clock (12-hour) ----
+  // Lightbox for "Full schematic" / "Enlarge" buttons
   (function () {
-    var svg = document.getElementById('clock');
-    if (!svg) return;
-    var NS = 'http://www.w3.org/2000/svg';
-    // segment rectangles in a 40 x 70 cell: a b c d e f g
-    var SEG = {
-      a: [6, 0, 28, 6],  b: [34, 6, 6, 26], c: [34, 38, 6, 26], d: [6, 64, 28, 6],
-      e: [0, 38, 6, 26], f: [0, 6, 6, 26],  g: [6, 32, 28, 6]
-    };
-    var MAP = ['abcdef','bc','abged','abgcd','fgbc','afgcd','afgedc','abc','abcdefg','abcdfg'];
-    var offsets = [0, 50, 120, 170], digits = [];
-
-    offsets.forEach(function (ox) {
-      var g = document.createElementNS(NS, 'g'), segs = {};
-      g.setAttribute('transform', 'translate(' + ox + ',0) skewX(-6)');
-      Object.keys(SEG).forEach(function (k) {
-        var r = document.createElementNS(NS, 'rect'), s = SEG[k];
-        r.setAttribute('x', s[0]); r.setAttribute('y', s[1]);
-        r.setAttribute('width', s[2]); r.setAttribute('height', s[3]);
-        r.setAttribute('rx', 2.5); r.setAttribute('class', 'seg off');
-        g.appendChild(r); segs[k] = r;
+    var lb = document.getElementById('lb');
+    if (!lb || !lb.showModal) return;
+    var img = lb.querySelector('img'), cap = lb.querySelector('p');
+    document.querySelectorAll('.expand').forEach(function (b) {
+      b.addEventListener('click', function () {
+        img.src = b.dataset.full; img.alt = b.dataset.caption || '';
+        cap.textContent = b.dataset.caption || '';
+        lb.showModal();
       });
-      svg.appendChild(g); digits.push(segs);
     });
-
-    var dots = [22, 48].map(function (cy) {
-      var c = document.createElementNS(NS, 'circle');
-      c.setAttribute('cx', 105); c.setAttribute('cy', cy); c.setAttribute('r', 4);
-      c.setAttribute('class', 'colon'); svg.appendChild(c); return c;
-    });
-
-    var ampm = document.createElementNS(NS, 'text');
-    ampm.setAttribute('x', 224); ampm.setAttribute('y', 68);
-    ampm.setAttribute('class', 'd-label'); ampm.setAttribute('style', 'font-size:13px;font-weight:600;fill:var(--accent)');
-    svg.appendChild(ampm);
-
-    function show(i, n) {
-      var on = n == null ? '' : MAP[n];
-      Object.keys(digits[i]).forEach(function (k) {
-        digits[i][k].setAttribute('class', on.indexOf(k) > -1 ? 'seg' : 'seg off');
-      });
-    }
-    function tick() {
-      var d = new Date(), h = d.getHours(), m = d.getMinutes();
-      var h12 = h % 12 || 12;
-      show(0, h12 >= 10 ? 1 : null);
-      show(1, h12 % 10);
-      show(2, Math.floor(m / 10));
-      show(3, m % 10);
-      ampm.textContent = h < 12 ? 'AM' : 'PM';
-      var blink = d.getSeconds() % 2 === 0 ? 1 : 0.15;
-      dots.forEach(function (c) { c.style.opacity = blink; });
-    }
-    tick(); setInterval(tick, 1000);
+    lb.addEventListener('click', function (e) { if (e.target === lb || e.target.classList.contains('close')) lb.close(); });
   })();
+
+  // Respect reduced-motion: don't autoplay demo videos, show controls instead
+  if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.querySelectorAll('video[autoplay]').forEach(function (v) { v.pause(); v.removeAttribute('autoplay'); v.controls = true; });
+  }
 
   document.getElementById('yr').textContent = new Date().getFullYear();
 </script>

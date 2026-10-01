@@ -1,0 +1,542 @@
+<!doctype html>
+<!--
+  Matthew Moreno — Portfolio
+  ---------------------------------------------------------------
+  HOW TO EDIT
+  • Add your GitHub and LinkedIn links: search for "TODO" in this file.
+  • Add project photos later: put the image in an "images" folder and
+    replace a project's <svg>...</svg> diagram with:
+        <img src="images/fpga-vending.jpg" alt="FPGA vending machine controller on a Basys 3 board">
+  • The résumé button opens resume.pdf. Keep that file in the same folder as this page.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Matthew Moreno — Electrical & Computer Engineering</title>
+<meta name="description" content="Portfolio of Matthew Moreno, Electrical & Computer Engineering student in Miami, FL. FPGA design, digital systems, electronics, and robotics.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f6f5f1;
+    --surface: #ffffff;
+    --ink: #16181d;
+    --muted: #5b606b;
+    --line: #e3e1da;
+    --accent: #b4532a;
+    --accent-soft: #f5e6dc;
+    --trace: #1d6b58;
+    --trace-dim: rgba(29,107,88,.14);
+    --shadow: 0 1px 2px rgba(20,20,20,.04), 0 6px 24px rgba(20,20,20,.05);
+    --sans: "Inter Tight", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    --mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0f1115;
+      --surface: #171a20;
+      --ink: #ebe9e4;
+      --muted: #9ba1ab;
+      --line: #282c34;
+      --accent: #e38b5c;
+      --accent-soft: #2b1e17;
+      --trace: #5fc6a6;
+      --trace-dim: rgba(95,198,166,.13);
+      --shadow: none;
+      color-scheme: dark;
+    }
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; scroll-padding-top: 72px; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font: 16px/1.6 var(--sans);
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; }
+  .wrap { max-width: 1040px; margin: 0 auto; padding: 0 20px; }
+
+  /* ---------- Nav ---------- */
+  nav {
+    position: sticky; top: 0; z-index: 10;
+    background: color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter: saturate(1.4) blur(10px);
+    -webkit-backdrop-filter: saturate(1.4) blur(10px);
+    border-bottom: 1px solid var(--line);
+  }
+  nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 58px; }
+  .mark { font: 500 14px var(--mono); text-decoration: none; letter-spacing: .02em; }
+  .mark span { color: var(--accent); }
+  nav ul { display: flex; gap: 22px; list-style: none; margin: 0; padding: 0; }
+  nav ul a { text-decoration: none; font-size: 14px; color: var(--muted); }
+  nav ul a:hover { color: var(--ink); }
+
+  /* ---------- Hero ---------- */
+  .hero { padding: 88px 0 72px; }
+  .eyebrow {
+    font: 500 12.5px var(--mono); letter-spacing: .08em; text-transform: uppercase;
+    color: var(--trace); display: flex; align-items: center; gap: 10px; margin-bottom: 22px;
+  }
+  .eyebrow::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--trace); box-shadow: 0 0 0 4px var(--trace-dim); }
+  h1 { font-size: clamp(40px, 7vw, 68px); line-height: 1.02; letter-spacing: -.03em; margin: 0 0 22px; font-weight: 700; }
+  .lede { font-size: clamp(17px, 2.2vw, 20px); color: var(--muted); max-width: 640px; margin: 0 0 34px; }
+  .lede strong { color: var(--ink); font-weight: 500; }
+  .actions { display: flex; flex-wrap: wrap; gap: 10px; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 11px 18px; border-radius: 10px; font-size: 15px; font-weight: 500;
+    text-decoration: none; border: 1px solid var(--line); background: var(--surface);
+    transition: border-color .15s, transform .15s;
+  }
+  .btn:hover { border-color: var(--muted); transform: translateY(-1px); }
+  .btn.primary { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+  .btn svg { width: 16px; height: 16px; flex: none; }
+  .meta { margin-top: 30px; display: flex; flex-wrap: wrap; gap: 8px 22px; font: 13px var(--mono); color: var(--muted); }
+
+  /* ---------- Sections ---------- */
+  section { padding: 64px 0; border-top: 1px solid var(--line); }
+  .section-head { display: flex; align-items: baseline; gap: 14px; margin-bottom: 32px; }
+  .section-head .num { font: 500 13px var(--mono); color: var(--accent); }
+  h2 { font-size: clamp(26px, 3.4vw, 34px); letter-spacing: -.02em; margin: 0; font-weight: 600; }
+  h3 { font-size: 20px; letter-spacing: -.01em; margin: 0 0 6px; font-weight: 600; }
+
+  /* ---------- Projects ---------- */
+  .projects { display: grid; gap: 22px; }
+  .project {
+    display: grid; grid-template-columns: 1fr 1.15fr; gap: 0;
+    background: var(--surface); border: 1px solid var(--line); border-radius: 16px;
+    overflow: hidden; box-shadow: var(--shadow);
+  }
+  .figure {
+    position: relative; min-height: 240px; display: grid; place-items: center; padding: 28px;
+    background:
+      linear-gradient(var(--trace-dim) 1px, transparent 1px) 0 0 / 20px 20px,
+      linear-gradient(90deg, var(--trace-dim) 1px, transparent 1px) 0 0 / 20px 20px;
+    border-right: 1px solid var(--line);
+  }
+  .figure svg { width: 100%; max-width: 360px; height: auto; overflow: visible; }
+  .figure img { width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0; }
+  .figure .tag {
+    position: absolute; left: 14px; bottom: 12px;
+    font: 11px var(--mono); color: var(--muted); letter-spacing: .04em;
+  }
+  .body { padding: 28px 30px 30px; }
+  .kind { font: 500 12px var(--mono); color: var(--accent); letter-spacing: .06em; text-transform: uppercase; margin-bottom: 10px; }
+  .body p { color: var(--muted); margin: 0 0 14px; }
+  .body ul { margin: 0 0 18px; padding-left: 18px; color: var(--muted); }
+  .body li { margin-bottom: 4px; }
+  .body li::marker { color: var(--trace); }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; }
+  .chip {
+    font: 12px var(--mono); padding: 4px 9px; border-radius: 6px;
+    background: var(--accent-soft); color: var(--accent);
+  }
+
+  /* diagram strokes */
+  .d-trace { stroke: var(--trace); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  .d-axis { stroke: var(--muted); stroke-width: 1; opacity: .45; stroke-dasharray: 2 3; }
+  .d-arrow { stroke: var(--muted); stroke-width: 1.4; fill: none; }
+  .d-label { font: 10.5px var(--mono); fill: var(--muted); }
+  .d-state { fill: var(--surface); stroke: var(--trace); stroke-width: 2; }
+  .d-state-text { font: 600 10px var(--mono); fill: var(--ink); text-anchor: middle; dominant-baseline: middle; }
+  .seg { fill: var(--accent); transition: opacity .15s; }
+  .seg.off { opacity: .1; }
+  .colon { fill: var(--accent); }
+
+  /* ---------- Experience ---------- */
+  .timeline { display: grid; gap: 0; }
+  .job { display: grid; grid-template-columns: 190px 1fr; gap: 24px; padding: 24px 0; border-bottom: 1px dashed var(--line); }
+  .job:last-child { border-bottom: 0; }
+  .when { font: 13px var(--mono); color: var(--muted); padding-top: 3px; }
+  .org { color: var(--accent); font-weight: 500; margin-bottom: 8px; }
+  .job p { margin: 0; color: var(--muted); }
+
+  /* ---------- Skills ---------- */
+  .skills { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 16px; }
+  .skill-card { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 22px; }
+  .skill-card h4 { margin: 0 0 12px; font: 500 12.5px var(--mono); text-transform: uppercase; letter-spacing: .06em; color: var(--trace); }
+  .skill-card .chips .chip { background: transparent; border: 1px solid var(--line); color: var(--ink); }
+
+  /* ---------- Education ---------- */
+  .edu { display: grid; grid-template-columns: 1.2fr 1fr; gap: 16px; }
+  .panel { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 24px; }
+  .panel p { margin: 0; color: var(--muted); }
+  .panel ul { margin: 0; padding-left: 18px; color: var(--muted); }
+  .panel li { margin-bottom: 6px; }
+  .panel li::marker { color: var(--accent); }
+  .label { font: 500 12px var(--mono); text-transform: uppercase; letter-spacing: .06em; color: var(--muted); margin: 18px 0 8px; }
+
+  /* ---------- Contact ---------- */
+  .contact { text-align: center; padding: 88px 0 96px; }
+  .contact h2 { font-size: clamp(30px, 4.6vw, 46px); margin-bottom: 14px; }
+  .contact p { color: var(--muted); max-width: 520px; margin: 0 auto 28px; }
+  .contact .actions { justify-content: center; }
+  footer { border-top: 1px solid var(--line); padding: 24px 0 36px; font: 12.5px var(--mono); color: var(--muted); }
+  footer .wrap { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 800px) {
+    .project { grid-template-columns: 1fr; }
+    .figure { border-right: 0; border-bottom: 1px solid var(--line); min-height: 200px; }
+    .edu { grid-template-columns: 1fr; }
+    .job { grid-template-columns: 1fr; gap: 6px; }
+  }
+  @media (max-width: 520px) {
+    .wrap { padding: 0 16px; }
+    nav ul { gap: 16px; }
+    nav ul li.hide-sm { display: none; }
+    .hero { padding: 56px 0 52px; }
+    .body { padding: 22px 20px 24px; }
+    .btn { flex: 1 1 auto; justify-content: center; }
+    .skills { grid-template-columns: 1fr; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .btn, .seg { transition: none; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a class="mark" href="#top">matthew<span>.</span>moreno</a>
+    <ul>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li class="hide-sm"><a href="#skills">Skills</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="wrap">
+    <div class="eyebrow">Open to engineering internships</div>
+    <h1>Matthew Moreno</h1>
+    <p class="lede">
+      <strong>Electrical &amp; Computer Engineering student</strong> at Miami Dade College.
+      I work on digital systems, FPGA design, and hands-on electronics. I also enjoy robotics
+      and building practical things that solve real problems.
+    </p>
+    <div class="actions">
+      <a class="btn primary" href="mailto:morenomatthew10@yahoo.com">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+        Email me
+      </a>
+      <a class="btn" href="resume.pdf" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M9 14h6M9 17h4"/></svg>
+        Résumé
+      </a>
+      <!-- TODO: replace with your LinkedIn URL -->
+      <a class="btn" href="https://www.linkedin.com/in/YOUR-LINKEDIN" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.75h4v11H3zm7 0h3.8v1.5h.06c.53-1 1.83-2.06 3.77-2.06 4.03 0 4.77 2.65 4.77 6.1v5.46h-4v-4.84c0-1.16-.02-2.64-1.6-2.64-1.62 0-1.86 1.26-1.86 2.56v4.92h-4z"/></svg>
+        LinkedIn
+      </a>
+      <!-- TODO: replace with your GitHub URL -->
+      <a class="btn" href="https://github.com/YOUR-GITHUB" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.42-2.7 5.4-5.26 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5z"/></svg>
+        GitHub
+      </a>
+    </div>
+    <div class="meta">
+      <span>Miami, FL</span>
+      <span>IEEE Student Officer</span>
+      <span>English / Español</span>
+    </div>
+  </div>
+</header>
+
+<!-- ================= PROJECTS ================= -->
+<section id="projects">
+  <div class="wrap">
+    <div class="section-head"><span class="num">01</span><h2>Engineering Projects</h2></div>
+
+    <div class="projects">
+
+      <!-- Project 1 -->
+      <article class="project">
+        <div class="figure">
+          <!-- Replace this <svg> with <img src="images/fpga-vending.jpg" alt="..."> when you have a photo -->
+          <svg viewBox="0 -24 320 200" role="img" aria-label="State diagram: Idle, Credit, Vend, Change">
+            <defs>
+              <marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                <path d="M0 0 L10 5 L0 10 z" fill="currentColor" style="fill:var(--muted)"/>
+              </marker>
+            </defs>
+            <line class="d-arrow" x1="83" y1="78" x2="133" y2="53" marker-end="url(#ah)"/>
+            <line class="d-arrow" x1="183" y1="52" x2="233" y2="77" marker-end="url(#ah)"/>
+            <line class="d-arrow" x1="237" y1="102" x2="187" y2="127" marker-end="url(#ah)"/>
+            <line class="d-arrow" x1="137" y1="128" x2="87" y2="103" marker-end="url(#ah)"/>
+            <path class="d-arrow" d="M149 17 C 136 -18, 184 -18, 171 16" marker-end="url(#ah)"/>
+            <text class="d-label" x="72" y="56">coin</text>
+            <text class="d-label" x="218" y="56">select</text>
+            <text class="d-label" x="220" y="134">vend</text>
+            <text class="d-label" x="72" y="134">done</text>
+            <text class="d-label" x="186" y="-10">coin</text>
+            <circle class="d-state" cx="60" cy="90" r="26"/><text class="d-state-text" x="60" y="90">IDLE</text>
+            <circle class="d-state" cx="160" cy="40" r="26"/><text class="d-state-text" x="160" y="40">CREDIT</text>
+            <circle class="d-state" cx="260" cy="90" r="26"/><text class="d-state-text" x="260" y="90">VEND</text>
+            <circle class="d-state" cx="160" cy="140" r="26"/><text class="d-state-text" x="160" y="140">CHANGE</text>
+          </svg>
+          <span class="tag">fig. 1 — FSM concept</span>
+        </div>
+        <div class="body">
+          <div class="kind">Digital Logic · FPGA</div>
+          <h3>FPGA-Based Vending Machine Controller</h3>
+          <p>A vending machine controller built entirely in FPGA digital logic, driven by a finite state machine.</p>
+          <ul>
+            <li>Designed the finite state machine: its states, inputs, and transitions</li>
+            <li>Built the combinational and sequential circuits from logic gates</li>
+            <li>Validated the design using Vivado, Vitis, and Microchip Studio</li>
+          </ul>
+          <div class="chips"><span class="chip">VHDL</span><span class="chip">FSM</span><span class="chip">Vivado</span><span class="chip">Vitis</span></div>
+        </div>
+      </article>
+
+      <!-- Project 2 -->
+      <article class="project">
+        <div class="figure">
+          <!-- Replace this <svg> with <img src="images/digital-clock.jpg" alt="..."> when you have a photo -->
+          <svg id="clock" viewBox="-12 -12 282 94" role="img" aria-label="Seven-segment display showing the current time"></svg>
+          <span class="tag">fig. 2 — live 7-segment readout</span>
+        </div>
+        <div class="body">
+          <div class="kind">Sequential Logic</div>
+          <h3>Digital 12-Hour Clock</h3>
+          <p>A digital clock built from sequential logic and timing circuits.</p>
+          <ul>
+            <li>Built binary counters and clock-division logic from flip-flops and clock signals</li>
+            <li>Applied core digital-systems concepts, including synchronization and state control</li>
+          </ul>
+          <div class="chips"><span class="chip">Flip-Flops</span><span class="chip">Binary Counters</span><span class="chip">Clock Division</span><span class="chip">Timing</span></div>
+        </div>
+      </article>
+
+      <!-- Project 3 -->
+      <article class="project">
+        <div class="figure">
+          <!-- Replace this <svg> with <img src="images/ac-dc-converter.jpg" alt="..."> when you have a photo -->
+          <svg viewBox="-4 0 338 104" role="img" aria-label="AC sine wave, full-wave rectified wave, and regulated DC output">
+            <defs>
+              <marker id="ah2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+                <path d="M0 0 L10 5 L0 10 z" style="fill:var(--muted)"/>
+              </marker>
+            </defs>
+            <line class="d-axis" x1="0" y1="45" x2="80" y2="45"/>
+            <line class="d-axis" x1="125" y1="56" x2="205" y2="56"/>
+            <line class="d-axis" x1="250" y1="56" x2="330" y2="56"/>
+            <polyline class="d-trace" points="0.0,45.0 1.3,40.4 2.7,36.1 4.0,32.1 5.3,28.7 6.7,25.9 8.0,24.1 9.3,23.1 10.7,23.1 12.0,24.1 13.3,25.9 14.7,28.7 16.0,32.1 17.3,36.1 18.7,40.4 20.0,45.0 21.3,49.6 22.7,53.9 24.0,57.9 25.3,61.3 26.7,64.1 28.0,65.9 29.3,66.9 30.7,66.9 32.0,65.9 33.3,64.1 34.7,61.3 36.0,57.9 37.3,53.9 38.7,49.6 40.0,45.0 41.3,40.4 42.7,36.1 44.0,32.1 45.3,28.7 46.7,25.9 48.0,24.1 49.3,23.1 50.7,23.1 52.0,24.1 53.3,25.9 54.7,28.7 56.0,32.1 57.3,36.1 58.7,40.4 60.0,45.0 61.3,49.6 62.7,53.9 64.0,57.9 65.3,61.3 66.7,64.1 68.0,65.9 69.3,66.9 70.7,66.9 72.0,65.9 73.3,64.1 74.7,61.3 76.0,57.9 77.3,53.9 78.7,49.6 80.0,45.0"/>
+            <polyline class="d-trace" points="125.0,56.0 126.3,51.4 127.7,47.1 129.0,43.1 130.3,39.7 131.7,36.9 133.0,35.1 134.3,34.1 135.7,34.1 137.0,35.1 138.3,36.9 139.7,39.7 141.0,43.1 142.3,47.1 143.7,51.4 145.0,56.0 146.3,51.4 147.7,47.1 149.0,43.1 150.3,39.7 151.7,36.9 153.0,35.1 154.3,34.1 155.7,34.1 157.0,35.1 158.3,36.9 159.7,39.7 161.0,43.1 162.3,47.1 163.7,51.4 165.0,56.0 166.3,51.4 167.7,47.1 169.0,43.1 170.3,39.7 171.7,36.9 173.0,35.1 174.3,34.1 175.7,34.1 177.0,35.1 178.3,36.9 179.7,39.7 181.0,43.1 182.3,47.1 183.7,51.4 185.0,56.0 186.3,51.4 187.7,47.1 189.0,43.1 190.3,39.7 191.7,36.9 193.0,35.1 194.3,34.1 195.7,34.1 197.0,35.1 198.3,36.9 199.7,39.7 201.0,43.1 202.3,47.1 203.7,51.4 205.0,56.0"/>
+            <polyline class="d-trace" points="250.0,31.0 257.0,32.0 267.0,33.5 270.0,31.0 277.0,32.0 287.0,33.5 290.0,31.0 297.0,32.0 307.0,33.5 310.0,31.0 317.0,32.0 327.0,33.5 330.0,31.0"/>
+            <line class="d-arrow" x1="90" y1="45" x2="116" y2="45" marker-end="url(#ah2)"/>
+            <line class="d-arrow" x1="215" y1="45" x2="241" y2="45" marker-end="url(#ah2)"/>
+            <text class="d-label" x="40" y="92" text-anchor="middle">AC in</text>
+            <text class="d-label" x="165" y="92" text-anchor="middle">rectified</text>
+            <text class="d-label" x="290" y="92" text-anchor="middle">regulated DC</text>
+          </svg>
+          <span class="tag">fig. 3 — signal path</span>
+        </div>
+        <div class="body">
+          <div class="kind">Power Electronics</div>
+          <h3>AC-to-DC Voltage Converter</h3>
+          <p>A working power supply that turns AC mains into a stable DC output.</p>
+          <ul>
+            <li>Designed and built the rectification, filtering, and voltage-regulation stages</li>
+            <li>Verified output stability with an oscilloscope and digital multimeter</li>
+          </ul>
+          <div class="chips"><span class="chip">Rectification</span><span class="chip">Filtering</span><span class="chip">Regulation</span><span class="chip">Oscilloscope</span></div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ================= EXPERIENCE ================= -->
+<section id="experience">
+  <div class="wrap">
+    <div class="section-head"><span class="num">02</span><h2>Experience</h2></div>
+    <div class="timeline">
+      <div class="job">
+        <div class="when">Aug 2026 — Present</div>
+        <div>
+          <h3>Executive Administrative Intern</h3>
+          <div class="org">City of Doral · Office of the City Council</div>
+          <p>I support the daily operations of a City Councilmember's office: scheduling, correspondence, and constituent requests. I also prepare briefing materials and help with community events.</p>
+        </div>
+      </div>
+      <div class="job">
+        <div class="when">Jul 2025 — Present</div>
+        <div>
+          <h3>Robotics &amp; Coding Instructor</h3>
+          <div class="org">Teknik Labs · Self-contracted</div>
+          <p>I teach after-school robotics and coding. I design hands-on lessons that build programming and engineering fundamentals, and I mentor students through projects at a range of skill levels.</p>
+        </div>
+      </div>
+      <div class="job">
+        <div class="when">Mar 2023 — Apr 2025</div>
+        <div>
+          <h3>Solar Sales &amp; Logistics Manager</h3>
+          <div class="org">GC Solar and Electric</div>
+          <p>I designed custom solar panel layouts around electrical constraints and system efficiency, applied that technical knowledge to real renewable-energy systems, and helped plan installations.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SKILLS ================= -->
+<section id="skills">
+  <div class="wrap">
+    <div class="section-head"><span class="num">03</span><h2>Technical Skills</h2></div>
+    <div class="skills">
+      <div class="skill-card">
+        <h4>Digital Design</h4>
+        <div class="chips"><span class="chip">FPGA Design</span><span class="chip">Finite State Machines</span><span class="chip">Combinational Logic</span><span class="chip">Sequential Logic</span><span class="chip">Karnaugh Maps</span><span class="chip">Truth Tables</span><span class="chip">Timing Analysis</span><span class="chip">Binary Counters</span></div>
+      </div>
+      <div class="skill-card">
+        <h4>Electronics &amp; Hardware</h4>
+        <div class="chips"><span class="chip">Circuit Prototyping</span><span class="chip">Soldering</span><span class="chip">AC/DC Conversion</span><span class="chip">Oscilloscope</span><span class="chip">Digital Multimeter</span><span class="chip">Debugging &amp; Testing</span></div>
+      </div>
+      <div class="skill-card">
+        <h4>Programming &amp; HDL</h4>
+        <div class="chips"><span class="chip">C</span><span class="chip">VHDL</span><span class="chip">Arduino</span><span class="chip">Raspberry Pi</span></div>
+      </div>
+      <div class="skill-card">
+        <h4>Tools</h4>
+        <div class="chips"><span class="chip">Vivado</span><span class="chip">Vitis</span><span class="chip">Microchip Studio</span><span class="chip">VirtualBox</span><span class="chip">Microsoft Office</span></div>
+      </div>
+      <div class="skill-card">
+        <h4>3D Design &amp; Prototyping</h4>
+        <div class="chips"><span class="chip">3D Modeling</span><span class="chip">FDM 3D Printing</span><span class="chip">Design Iteration</span></div>
+      </div>
+      <div class="skill-card">
+        <h4>Operating Systems</h4>
+        <div class="chips"><span class="chip">Linux</span><span class="chip">Windows</span><span class="chip">Install &amp; Config</span><span class="chip">Troubleshooting</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= EDUCATION ================= -->
+<section id="education">
+  <div class="wrap">
+    <div class="section-head"><span class="num">04</span><h2>Education &amp; Leadership</h2></div>
+    <div class="edu">
+      <div class="panel">
+        <h3>Miami Dade College</h3>
+        <p>B.S. in Electrical &amp; Computer Engineering · Aug 2022 — Present</p>
+        <div class="label">Relevant coursework</div>
+        <ul>
+          <li>Digital Systems &amp; Logic Design</li>
+          <li>Computer Engineering Fundamentals</li>
+          <li>Electronics &amp; Circuit Analysis</li>
+        </ul>
+        <div class="label">Certifications</div>
+        <ul>
+          <li>CompTIA A+</li>
+          <li>Photovoltaic Design &amp; Installation</li>
+        </ul>
+      </div>
+      <div class="panel">
+        <h3>Leadership &amp; Strengths</h3>
+        <ul style="margin-top:14px">
+          <li>IEEE Student Officer</li>
+          <li>Robotics instructor and mentor</li>
+          <li>Problem solving and analysis</li>
+          <li>Teamwork and technical communication</li>
+          <li>Bilingual: English &amp; Spanish</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CONTACT ================= -->
+<section class="contact" id="contact">
+  <div class="wrap">
+    <h2>Let's build something.</h2>
+    <p>I'm looking for engineering internships in electronics, digital systems, and embedded hardware. The best way to reach me is by email.</p>
+    <div class="actions">
+      <a class="btn primary" href="mailto:morenomatthew10@yahoo.com">morenomatthew10@yahoo.com</a>
+      <a class="btn" href="resume.pdf" target="_blank" rel="noopener">Download résumé</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="yr">2026</span> Matthew Moreno</span>
+    <span>Miami, FL</span>
+  </div>
+</footer>
+
+<script>
+  // ---- Live 7-segment clock (12-hour) ----
+  (function () {
+    var svg = document.getElementById('clock');
+    if (!svg) return;
+    var NS = 'http://www.w3.org/2000/svg';
+    // segment rectangles in a 40 x 70 cell: a b c d e f g
+    var SEG = {
+      a: [6, 0, 28, 6],  b: [34, 6, 6, 26], c: [34, 38, 6, 26], d: [6, 64, 28, 6],
+      e: [0, 38, 6, 26], f: [0, 6, 6, 26],  g: [6, 32, 28, 6]
+    };
+    var MAP = ['abcdef','bc','abged','abgcd','fgbc','afgcd','afgedc','abc','abcdefg','abcdfg'];
+    var offsets = [0, 50, 120, 170], digits = [];
+
+    offsets.forEach(function (ox) {
+      var g = document.createElementNS(NS, 'g'), segs = {};
+      g.setAttribute('transform', 'translate(' + ox + ',0) skewX(-6)');
+      Object.keys(SEG).forEach(function (k) {
+        var r = document.createElementNS(NS, 'rect'), s = SEG[k];
+        r.setAttribute('x', s[0]); r.setAttribute('y', s[1]);
+        r.setAttribute('width', s[2]); r.setAttribute('height', s[3]);
+        r.setAttribute('rx', 2.5); r.setAttribute('class', 'seg off');
+        g.appendChild(r); segs[k] = r;
+      });
+      svg.appendChild(g); digits.push(segs);
+    });
+
+    var dots = [22, 48].map(function (cy) {
+      var c = document.createElementNS(NS, 'circle');
+      c.setAttribute('cx', 105); c.setAttribute('cy', cy); c.setAttribute('r', 4);
+      c.setAttribute('class', 'colon'); svg.appendChild(c); return c;
+    });
+
+    var ampm = document.createElementNS(NS, 'text');
+    ampm.setAttribute('x', 224); ampm.setAttribute('y', 68);
+    ampm.setAttribute('class', 'd-label'); ampm.setAttribute('style', 'font-size:13px;font-weight:600;fill:var(--accent)');
+    svg.appendChild(ampm);
+
+    function show(i, n) {
+      var on = n == null ? '' : MAP[n];
+      Object.keys(digits[i]).forEach(function (k) {
+        digits[i][k].setAttribute('class', on.indexOf(k) > -1 ? 'seg' : 'seg off');
+      });
+    }
+    function tick() {
+      var d = new Date(), h = d.getHours(), m = d.getMinutes();
+      var h12 = h % 12 || 12;
+      show(0, h12 >= 10 ? 1 : null);
+      show(1, h12 % 10);
+      show(2, Math.floor(m / 10));
+      show(3, m % 10);
+      ampm.textContent = h < 12 ? 'AM' : 'PM';
+      var blink = d.getSeconds() % 2 === 0 ? 1 : 0.15;
+      dots.forEach(function (c) { c.style.opacity = blink; });
+    }
+    tick(); setInterval(tick, 1000);
+  })();
+
+  document.getElementById('yr').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>

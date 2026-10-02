@@ -147,6 +147,18 @@
   }
   .figure.tall { min-height: 470px; }
   .figure.paper { background: #f7f5ec; padding: 20px; }
+  .figure.wave { background: #14161a; padding: 56px 18px 52px; }
+  .project.wide { grid-template-columns: 1fr; }
+  .project.wide .figure { border-right: 0; border-bottom: 1px solid var(--line); }
+  .project.wide .body ul { columns: 2; column-gap: 40px; }
+  .project.wide .body li { break-inside: avoid; }
+  @media (max-width: 800px) { .project.wide .body ul { columns: 1; } .figure.wave { padding: 52px 10px 48px; } }
+  .figure.wave img { width: 100%; height: auto; display: block; border-radius: 6px; }
+  .code-link {
+    display: inline-block; margin-top: 18px; font: 500 13px var(--mono);
+    color: var(--accent); text-decoration: none; border-bottom: 1px solid currentColor; padding-bottom: 1px;
+  }
+  .code-link:hover { opacity: .8; }
   .figure.paper img { width: 100%; height: auto; max-height: 440px; object-fit: contain; display: block; }
   .figure .tag.on-media {
     left: 12px; bottom: 12px; right: 12px; width: fit-content; max-width: calc(100% - 24px);
@@ -314,6 +326,25 @@
 
     <div class="projects">
 
+      <!-- Project: Animatronic eye mechanism -->
+      <article class="project flip">
+        <div class="figure media">
+          <img src="images/animatronic-eyes.jpg" alt="Animatronic eye mechanism with two 3D-printed eyes and eyelids, wired to an Arduino" style="object-position: 55% 40%">
+          <span class="tag on-media">Restored mechanism with my 3D-printed eyes</span>
+        </div>
+        <div class="body">
+          <div class="kind">Robotics · Restoration</div>
+          <h3>Animatronic Eye Mechanism</h3>
+          <p>A broken animatronic eye mechanism that was sitting unused in the robotics lab. I repaired it, rewired it and programmed it to work again.</p>
+          <ul>
+            <li>Repaired the existing mechanism and 3D-printed replacement eyes</li>
+            <li>Wired the servos to an Arduino</li>
+            <li>Programmed the eye movement, head movement and blinking</li>
+          </ul>
+          <div class="chips"><span class="chip">Arduino</span><span class="chip">Servo Motors</span><span class="chip">3D Printing</span><span class="chip">Repair</span></div>
+        </div>
+      </article>
+
       <!-- Project: AC-to-DC -->
       <article class="project">
         <div class="figure media">
@@ -371,31 +402,32 @@
         </div>
       </article>
 
-      <!-- Project: FPGA vending machine (replace the <svg> with a photo when you have one) -->
+      <!-- Project: DC motor controller -->
       <article class="project flip">
-        <div class="figure">
-          <svg viewBox="0 -24 320 200" role="img" aria-label="State diagram: Idle, Credit, Vend, Change">
-            <defs>
-              <marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-                <path d="M0 0 L10 5 L0 10 z" style="fill:var(--muted)"/>
-              </marker>
-            </defs>
-            <line class="d-arrow" x1="83" y1="78" x2="133" y2="53" marker-end="url(#ah)"/>
-            <line class="d-arrow" x1="183" y1="52" x2="233" y2="77" marker-end="url(#ah)"/>
-            <line class="d-arrow" x1="237" y1="102" x2="187" y2="127" marker-end="url(#ah)"/>
-            <line class="d-arrow" x1="137" y1="128" x2="87" y2="103" marker-end="url(#ah)"/>
-            <path class="d-arrow" d="M149 17 C 136 -18, 184 -18, 171 16" marker-end="url(#ah)"/>
-            <text class="d-label" x="72" y="56">coin</text>
-            <text class="d-label" x="218" y="56">select</text>
-            <text class="d-label" x="220" y="134">vend</text>
-            <text class="d-label" x="72" y="134">done</text>
-            <text class="d-label" x="186" y="-10">coin</text>
-            <circle class="d-state" cx="60" cy="90" r="26"/><text class="d-state-text" x="60" y="90">IDLE</text>
-            <circle class="d-state" cx="160" cy="40" r="26"/><text class="d-state-text" x="160" y="40">CREDIT</text>
-            <circle class="d-state" cx="260" cy="90" r="26"/><text class="d-state-text" x="260" y="90">VEND</text>
-            <circle class="d-state" cx="160" cy="140" r="26"/><text class="d-state-text" x="160" y="140">CHANGE</text>
-          </svg>
-          <span class="tag">fig. — FSM concept</span>
+        <div class="figure media">
+          <img src="images/motor-controller.jpg" alt="Arduino motor controller with an H-bridge on a breadboard, a DC motor, push buttons and an LCD reading Speed 20%, Dir CW" loading="lazy" style="object-position: 50% 50%">
+          <span class="tag on-media">Running: LCD shows speed and direction</span>
+        </div>
+        <div class="body">
+          <div class="kind">Embedded · Motor Control</div>
+          <h3>DC Motor Controller with H-Bridge</h3>
+          <p>An Arduino-based controller that drives a DC motor through an H-bridge.</p>
+          <ul>
+            <li>Built the H-bridge circuit on a breadboard to drive the motor in both directions</li>
+            <li>Programmed the Arduino to set motor speed with PWM and to control direction</li>
+            <li>Four push buttons set the speed: two step it up or down by 5%, and two are presets for 25% and 50% that give 75% when pressed together</li>
+            <li>Added a 16x2 LCD that shows the current speed and direction</li>
+          </ul>
+          <div class="chips"><span class="chip">Arduino</span><span class="chip">H-Bridge</span><span class="chip">PWM</span><span class="chip">LCD</span></div>
+        </div>
+      </article>
+
+      <!-- Project: FPGA vending machine -->
+      <article class="project wide">
+        <div class="figure wave">
+          <img src="images/vending-waveform.png" alt="Simulation waveform of the vending machine FSM: coins, select, cancel, state, credit, dispense and change signals" loading="lazy">
+          <button class="expand" data-full="images/vending-waveform.png" data-caption="Simulation of the rebuilt VHDL controller (price 50¢): exact payment, overpayment with change, insufficient credit, and cancel. All four testbench checks pass.">⤢ Enlarge</button>
+          <span class="tag on-media">Simulation: all 4 testbench checks pass</span>
         </div>
         <div class="body">
           <div class="kind">Digital Logic · FPGA</div>
@@ -405,8 +437,10 @@
             <li>Designed the finite state machine: its states, inputs, and transitions</li>
             <li>Built the combinational and sequential circuits from logic gates</li>
             <li>Validated the design using Vivado, Vitis, and Microchip Studio</li>
+            <li>Rebuilt the controller in VHDL with a self-checking testbench covering payment, change, and cancel</li>
           </ul>
-          <div class="chips"><span class="chip">VHDL</span><span class="chip">FSM</span><span class="chip">Vivado</span><span class="chip">Vitis</span></div>
+          <div class="chips"><span class="chip">VHDL</span><span class="chip">FSM</span><span class="chip">Vivado</span><span class="chip">Testbench</span></div>
+          <a class="code-link" href="https://github.com/mattmoreno-ece/vending-machine-fsm" target="_blank" rel="noopener">View the VHDL on GitHub →</a>
         </div>
       </article>
 

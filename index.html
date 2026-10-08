@@ -384,10 +384,10 @@
 
       <!-- Project: Digital clock -->
       <article class="project">
-        <div class="figure media dark">
-          <img src="images/clock-schematic-detail.jpg" alt="Hand-drawn schematic of the clock's hours section: tens and ones counters and an adder chip" loading="lazy" style="object-position: 50% 40%">
-          <button class="expand" data-full="images/clock-schematic.jpg" data-caption="Hours section of the 12-hour clock: tens and ones counters, with gate logic that resets the count at 10 and at 13.">⤢ Full schematic</button>
-          <span class="tag on-media">My hours-section schematic</span>
+        <div class="figure media">
+          <video src="images/clock-demo.mp4" poster="images/clock-poster.jpg" autoplay muted loop playsinline preload="metadata" aria-label="The finished digital clock running on breadboards, with six seven-segment displays counting the seconds"></video>
+          <button class="expand" data-full="images/clock-schematic.jpg" data-caption="Hours section of the 12-hour clock: tens and ones counters, with gate logic that resets the count at 10 and at 13.">⤢ Schematic</button>
+          <span class="tag on-media">▶ Running: seconds counting on the displays</span>
         </div>
         <div class="body">
           <div class="kind">Sequential Logic</div>
@@ -395,6 +395,7 @@
           <p>A digital clock built from sequential logic and timing circuits.</p>
           <ul>
             <li>Built binary counters and clock-division logic from flip-flops and clock signals</li>
+            <li>Displayed hours, minutes and seconds on six seven-segment displays</li>
             <li>Designed reset logic so the hours roll over correctly from 12 back to 1</li>
             <li>Applied core digital-systems concepts, including synchronization and state control</li>
           </ul>
